@@ -1,0 +1,280 @@
+/* Creator UI only. Public form themes deliberately do not inherit these rules. */
+html.creator-dark {
+  --ink: #f4f4f6;
+  --muted: #adb0bb;
+  --line: #3a3c45;
+  --surface: #24262c;
+  --canvas: #18191d;
+  --accent: #91a7ff;
+}
+html.creator-dark body {
+  color: var(--ink);
+  background: var(--canvas);
+}
+html.creator-dark .dashboard,
+html.creator-dark .results-page,
+html.creator-dark .builder-app {
+  background: var(--canvas);
+  color: var(--ink);
+}
+html.creator-dark .dashboard-header,
+html.creator-dark .results-header,
+html.creator-dark .topbar,
+html.creator-dark .question-sidebar,
+html.creator-dark .right-sidebar {
+  background: #202126;
+  border-color: var(--line);
+}
+html.creator-dark .canvas,
+html.creator-dark .dashboard-content,
+html.creator-dark .results-content {
+  background: var(--canvas);
+}
+html.creator-dark .form-card,
+html.creator-dark .summary-card,
+html.creator-dark .response-list,
+html.creator-dark .empty-forms,
+html.creator-dark .empty-responses,
+html.creator-dark .rename-dialog,
+html.creator-dark .response-detail,
+html.creator-dark .preview-modal {
+  background: #24262c;
+  border-color: var(--line);
+  color: var(--ink);
+  box-shadow: 0 16px 42px #0007;
+}
+html.creator-dark .form-card-actions,
+html.creator-dark .response-row {
+  background: #24262c;
+  border-color: var(--line);
+}
+html.creator-dark .response-row:hover,
+html.creator-dark .question-card:hover {
+  background: #2d3037;
+}
+html.creator-dark .question-card.selected {
+  background: #28304a;
+  border-color: #6075c6;
+}
+html.creator-dark .ghost-button,
+html.creator-dark .form-card-actions button,
+html.creator-dark .form-card-actions a,
+html.creator-dark .close-preview,
+html.creator-dark .theme-toggle {
+  background: #30323a;
+  color: #f4f4f6;
+}
+html.creator-dark .ghost-button:hover,
+html.creator-dark .form-card-actions button:hover,
+html.creator-dark .form-card-actions a:hover,
+html.creator-dark .theme-toggle:hover {
+  background: #3b3e48;
+  color: #fff;
+}
+html.creator-dark .add-question {
+  background: #29365e;
+  color: #dce4ff;
+}
+html.creator-dark .publish-button,
+html.creator-dark .new-form-button {
+  background: #90a8ff;
+  color: #10131d;
+}
+html.creator-dark .publish-button:hover,
+html.creator-dark .new-form-button:hover {
+  background: #b3c2ff;
+}
+html.creator-dark input,
+html.creator-dark textarea,
+html.creator-dark select,
+html.creator-dark .question-type-select,
+html.creator-dark .branch-row select,
+html.creator-dark .design-label input,
+html.creator-dark .design-label textarea {
+  background: #2c2e35;
+  border-color: #4a4d58;
+  color: #f4f4f6;
+}
+html.creator-dark input::placeholder,
+html.creator-dark textarea::placeholder {
+  color: #9599a7;
+}
+html.creator-dark .right-tabs button,
+html.creator-dark .type-display,
+html.creator-dark .coming-soon {
+  color: #c7cad3;
+  background: transparent;
+}
+html.creator-dark .right-tabs .active {
+  color: #fff;
+  border-color: #91a7ff;
+}
+html.creator-dark .sidebar-heading,
+html.creator-dark .eyebrow,
+html.creator-dark .form-meta,
+html.creator-dark .results-heading > div > p:not(.eyebrow),
+html.creator-dark .section-title span,
+html.creator-dark .text-summary > span,
+html.creator-dark .response-row div span,
+html.creator-dark .empty-forms p,
+html.creator-dark .empty-responses p,
+html.creator-dark .response-detail section p,
+html.creator-dark .design-note {
+  color: #adb0bb;
+}
+html.creator-dark .results-header > div a,
+html.creator-dark .response-detail h3,
+html.creator-dark .form-card-title h2,
+html.creator-dark .editor-panel,
+html.creator-dark .canvas-label,
+html.creator-dark .summary-card,
+html.creator-dark .question-card {
+  color: #f4f4f6;
+}
+html.creator-dark .response-index,
+html.creator-dark .summary-card-heading > span,
+html.creator-dark .response-badge {
+  background: #363945;
+  color: #dce4ff;
+}
+html.creator-dark .summary-bars i {
+  background: #3a3d47;
+}
+html.creator-dark .modal-backdrop {
+  background: #07080bbb;
+}
+html.creator-dark .toast {
+  background: #30323a;
+  color: #fff;
+  box-shadow: 0 11px 25px #0009;
+}
+html.creator-dark .status.draft {
+  background: #393b42;
+  color: #d2d4d9;
+}
+html.creator-dark .status.published {
+  background: #233d29;
+  color: #b9f3c4;
+}
+html.creator-dark .form-card-art {
+  background: linear-gradient(135deg, #2a365d, #44304c);
+  color: #b9c6ff;
+}
+html.creator-dark .form-card-art span {
+  background: #252833d9;
+}
+/* Builder controls have several intentionally explicit light-mode colors. Override
+   them together so labels, editors, menus, and inspector controls stay legible. */
+html.creator-dark .editor-panel,
+html.creator-dark .editor-panel .field-label,
+html.creator-dark .editor-panel .field-label span,
+html.creator-dark .editor-panel .setting-row strong,
+html.creator-dark .editor-panel .setting-row span,
+html.creator-dark .editor-panel .two-fields label,
+html.creator-dark .editor-panel .option-row > span,
+html.creator-dark .branch-row {
+  color: #f1f2f5;
+}
+html.creator-dark .editor-panel .field-label span,
+html.creator-dark .editor-panel .setting-row span,
+html.creator-dark .editor-panel .two-fields label span,
+html.creator-dark .branch-row span {
+  color: #b7bac5;
+}
+html.creator-dark .editor-panel .inline-note,
+html.creator-dark .editor-panel .question-settings,
+html.creator-dark .inspector,
+html.creator-dark .empty-inspector {
+  color: #d7d9e0;
+}
+html.creator-dark .editor-panel .option-row,
+html.creator-dark .editor-panel .setting-row,
+html.creator-dark .editor-panel .question-settings,
+html.creator-dark .type-menu {
+  border-color: #424550;
+}
+html.creator-dark .editor-panel .option-row input,
+html.creator-dark .editor-panel .two-fields input,
+html.creator-dark .editor-panel .segmented button,
+html.creator-dark .type-choice,
+html.creator-dark .theme-choice {
+  background: #2c2e35;
+  border-color: #4a4d58;
+  color: #f4f4f6;
+}
+html.creator-dark .editor-panel .option-row > span {
+  background: #363945;
+  color: #f1f2f5;
+}
+html.creator-dark .editor-panel .segmented button.active,
+html.creator-dark .type-choice:hover,
+html.creator-dark .theme-choice.active {
+  background: #33406a;
+  border-color: #91a7ff;
+  color: #fff;
+}
+html.creator-dark .type-menu {
+  background: #24262c;
+  box-shadow: 0 16px 42px #0009;
+}
+html.creator-dark .type-menu .menu-heading,
+html.creator-dark .canvas-label span,
+html.creator-dark .question-card-copy span,
+html.creator-dark .question-number {
+  color: #b7bac5;
+}
+html.creator-dark .card-actions button,
+html.creator-dark .drag-handle {
+  color: #c2c5cf;
+}
+html.creator-dark .design-panel .theme-choice:hover {
+  background: #30323a;
+}
+html.creator-dark .editor-panel input:focus,
+html.creator-dark .editor-panel textarea:focus,
+html.creator-dark .editor-panel select:focus,
+html.creator-dark .design-panel input:focus,
+html.creator-dark .design-panel textarea:focus {
+  border-color: #91a7ff;
+  box-shadow: 0 0 0 3px #91a7ff33;
+}
+html.creator-dark .option-move {
+  color: #cdd3e8 !important;
+}
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 7px 10px;
+  background: #fff;
+  color: #4f5057;
+  font-size: 12px;
+  font-weight: 700;
+}
+.theme-toggle:hover {
+  background: #f2f2f0;
+}
+.dashboard-header .theme-toggle {
+  margin-left: auto;
+}
+.dashboard-header .avatar {
+  margin-left: 0;
+}
+@media (max-width: 600px) {
+  .theme-toggle {
+    padding: 7px;
+    font-size: 0;
+  }
+  .theme-toggle span {
+    font-size: 15px;
+  }
+}
+/* The builder editor has a light-mode card surface in globals.css. Dark mode
+   must replace that surface before applying its light foreground colors. */
+html.creator-dark .editor-panel {
+  background: #24262c;
+  border-color: #424550;
+  box-shadow: 0 16px 42px #0007;
+}

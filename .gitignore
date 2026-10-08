@@ -1,0 +1,31 @@
+# Next.js
+.next/
+.next-*/
+out/
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# TypeScript
+*.tsbuildinfo
+
+# Python
+__pycache__/
+*.py[cod]
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploaded files
+backend/data/uploads/
+
+# Build/cache
+dist/
+build/
