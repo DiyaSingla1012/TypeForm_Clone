@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { Toast, type ToastMessage } from "@/components/ui/Toast";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
@@ -27,6 +27,8 @@ export function FormBuilder({ formId }: { formId: string }) {
   const [showPreview, setShowPreview] = useState(false);
   const [draggedId, setDraggedId] = useState<string | null>(null);
   const [toast, setToast] = useState<ToastMessage | null>(null);
+  const questionSaveQueues = useRef<Record<string, Promise<void>>>({});
+  const questionSaveVersions = useRef<Record<string, number>>({});
   const [activePanel, setActivePanel] = useState<"question" | "design">(
     "question",
   );
@@ -62,6 +64,8 @@ export function FormBuilder({ formId }: { formId: string }) {
     const question = form?.questions.find((item) => item.id === id);
     if (!question) return;
     const next = { ...question, ...patch };
+    const version = (questionSaveVersions.current[id] ?? 0) + 1;
+    questionSaveVersions.current[id] = version;
     updateForm((current) => ({
       ...current,
       updatedAt: new Date().toISOString(),
@@ -69,20 +73,27 @@ export function FormBuilder({ formId }: { formId: string }) {
         item.id === id ? next : item,
       ),
     }));
-    void api
-      .updateQuestion(next)
+    const previousSave = questionSaveQueues.current[id] ?? Promise.resolve();
+    const save = previousSave
+      .catch(() => undefined)
+      .then(() => api.updateQuestion(next))
       .then((saved) =>
-        updateForm((current) => ({
-          ...current,
-          questions: current.questions.map((item) =>
-            item.id === id ? saved : item,
-          ),
-        })),
+        questionSaveVersions.current[id] === version
+          ? updateForm((current) => ({
+              ...current,
+              questions: current.questions.map((item) =>
+                item.id === id ? saved : item,
+              ),
+            }))
+          : undefined,
       )
       .catch((error: Error) => {
-        notify(error.message);
-        restoreForm();
+        if (questionSaveVersions.current[id] === version) {
+          notify(error.message);
+          restoreForm();
+        }
       });
+    questionSaveQueues.current[id] = save;
   };
   const addQuestion = (type: QuestionType) => {
     const question = createQuestion(type);
