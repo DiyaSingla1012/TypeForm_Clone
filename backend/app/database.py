@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from sqlalchemy import create_engine, inspect, text
@@ -5,7 +6,9 @@ from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 DATA_DIRECTORY = Path(__file__).resolve().parents[1] / "data"
 DATA_DIRECTORY.mkdir(exist_ok=True)
-DATABASE_URL = f"sqlite:///{DATA_DIRECTORY / 'typeform.db'}"
+# Tests can provide an isolated SQLite URL without touching the local demo
+# database. Normal development keeps using backend/data/typeform.db.
+DATABASE_URL = os.getenv("TYPEFORM_DATABASE_URL", f"sqlite:///{DATA_DIRECTORY / 'typeform.db'}")
 
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)

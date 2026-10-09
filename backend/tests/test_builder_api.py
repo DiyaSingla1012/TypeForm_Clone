@@ -1,10 +1,8 @@
-from fastapi.testclient import TestClient
-
-from app.main import app
+from contextlib import nullcontext
 
 
-def test_seeded_forms_and_builder_crud():
-    with TestClient(app) as client:
+def test_seeded_forms_and_builder_crud(client):
+    with nullcontext(client) as client:
         seeded = client.get("/api/forms")
         assert seeded.status_code == 200
         assert len(seeded.json()) >= 2
@@ -58,8 +56,8 @@ def test_seeded_forms_and_builder_crud():
         assert client.delete(f"/api/forms/{form_id}").status_code == 204
 
 
-def test_builder_changes_survive_a_fresh_api_read():
-    with TestClient(app) as client:
+def test_builder_changes_survive_a_fresh_api_read(client):
+    with nullcontext(client) as client:
         form = client.post("/api/forms", json={"title": "Persistence audit"}).json()
         form_id = form["id"]
         first = client.post(f"/api/forms/{form_id}/questions", json={"type": "multiple_choice", "title": "Pick a color", "description": "Choose one", "required": True, "settings": {"allowOther": True}, "options": ["Red", "Blue", "Green"]}).json()
@@ -87,8 +85,8 @@ def test_builder_changes_survive_a_fresh_api_read():
         assert client.delete(f"/api/forms/{form_id}").status_code == 204
 
 
-def test_deleting_a_midway_question_with_answers_keeps_the_form_editable():
-    with TestClient(app) as client:
+def test_deleting_a_midway_question_with_answers_keeps_the_form_editable(client):
+    with nullcontext(client) as client:
         form = client.post("/api/forms", json={"title": "Delete answered question"}).json()
         form_id = form["id"]
         first = client.post(f"/api/forms/{form_id}/questions", json={"type": "short_text", "title": "First", "required": True}).json()
@@ -105,8 +103,8 @@ def test_deleting_a_midway_question_with_answers_keeps_the_form_editable():
         assert client.delete(f"/api/forms/{form_id}").status_code == 204
 
 
-def test_questions_can_be_deleted_from_every_position_and_reindexed():
-    with TestClient(app) as client:
+def test_questions_can_be_deleted_from_every_position_and_reindexed(client):
+    with nullcontext(client) as client:
         for target_index in range(4):
             form = client.post("/api/forms", json={"title": "Position delete"}).json()
             form_id = form["id"]
@@ -123,8 +121,8 @@ def test_questions_can_be_deleted_from_every_position_and_reindexed():
             assert client.delete(f"/api/forms/{form_id}").status_code == 204
 
 
-def test_file_upload_answer_is_stored_as_a_server_file_reference():
-    with TestClient(app) as client:
+def test_file_upload_answer_is_stored_as_a_server_file_reference(client):
+    with nullcontext(client) as client:
         form = client.post("/api/forms", json={"title": "File upload"}).json()
         form_id = form["id"]
         question = client.post(f"/api/forms/{form_id}/questions", json={"type": "file_upload", "title": "Attach proof", "required": True}).json()
@@ -145,8 +143,8 @@ def test_file_upload_answer_is_stored_as_a_server_file_reference():
         assert client.delete(f"/api/forms/{form_id}").status_code == 204
 
 
-def test_choice_logic_jumps_skip_required_questions_and_persist_routes():
-    with TestClient(app) as client:
+def test_choice_logic_jumps_skip_required_questions_and_persist_routes(client):
+    with nullcontext(client) as client:
         form = client.post("/api/forms", json={"title": "Branching"}).json()
         form_id = form["id"]
         first = client.post(f"/api/forms/{form_id}/questions", json={"type": "yes_no", "title": "Continue?", "required": True}).json()

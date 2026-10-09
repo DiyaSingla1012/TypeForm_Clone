@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 
 import csv
 import io
+import os
 import uuid
 from pathlib import Path
 
@@ -32,8 +33,8 @@ async def lifespan(_: FastAPI):
 
 app = FastAPI(title="Typeform Builder API", version="0.1.0", lifespan=lifespan)
 app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
-UPLOAD_DIRECTORY = Path(__file__).resolve().parents[1] / "data" / "uploads"
-UPLOAD_DIRECTORY.mkdir(exist_ok=True)
+UPLOAD_DIRECTORY = Path(os.getenv("TYPEFORM_UPLOAD_DIRECTORY", str(Path(__file__).resolve().parents[1] / "data" / "uploads")))
+UPLOAD_DIRECTORY.mkdir(parents=True, exist_ok=True)
 MAX_UPLOAD_BYTES = 10 * 1024 * 1024
 app.mount("/uploads", StaticFiles(directory=UPLOAD_DIRECTORY), name="uploads")
 
