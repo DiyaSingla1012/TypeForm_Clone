@@ -28,4 +28,4 @@ backend/data/uploads/
 
 # Build/cache
 dist/
-build/
+/build/
