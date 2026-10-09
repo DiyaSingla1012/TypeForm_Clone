@@ -32,7 +32,14 @@ async def lifespan(_: FastAPI):
 
 
 app = FastAPI(title="Typeform Builder API", version="0.1.0", lifespan=lifespan)
-app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:3000", "http://127.0.0.1:3000", "https://type-form-clone-jade.vercel.app"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origin_regex=r"https://.*\.vercel\.app",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 UPLOAD_DIRECTORY = Path(os.getenv("TYPEFORM_UPLOAD_DIRECTORY", str(Path(__file__).resolve().parents[1] / "data" / "uploads")))
 UPLOAD_DIRECTORY.mkdir(parents=True, exist_ok=True)
 MAX_UPLOAD_BYTES = 10 * 1024 * 1024
